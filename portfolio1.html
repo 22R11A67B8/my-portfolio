@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veena Rajoju – Portfolio</title>
+  <meta name="description" content="Portfolio of Rajoju Veena – B.Tech (CSE-DS) student at GCET, showcasing skills in Core Java, C, Python, web development, and projects." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0e14;          /* page background */
+      --panel:#111625;       /* card background */
+      --text:#e6e8ef;        /* primary text */
+      --muted:#a7b0c0;       /* muted text */
+      --brand:#7c5cff;       /* accent */
+      --brand-2:#00d2ff;     /* accent 2 */
+      --line:#1d2336;        /* hairline */
+      --success:#2ecc71;
+      --danger:#ff6b6b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --radius-lg: 28px;
+      --max: 1080px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+
+    /* Nav */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(11,14,20,.9),rgba(11,14,20,.7) 60%,rgba(11,14,20,0));backdrop-filter:saturate(140%) blur(8px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line)}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow)}
+    .brand h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{padding:10px 14px;border-radius:10px;color:var(--muted);font-weight:600}
+    nav a:hover{background:#0f1526;color:var(--text)}
+    .cta{display:flex;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;box-shadow:var(--shadow);font-weight:600}
+    .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));border-color:transparent;color:#0a0d14}
+    .btn:active{transform:translateY(1px)}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden}
+    .hero::before{
+      content:"";position:absolute;inset:-30% -10% auto -10%;height:70vh;min-height:420px;background:radial-gradient(1200px 400px at 20% 10%, rgba(124,92,255,.22), transparent 60%), radial-gradient(1000px 600px at 80% -10%, rgba(0,210,255,.18), transparent 60%);
+      filter:blur(12px);pointer-events:none
+    }
+    .hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:64px 0 24px}
+    .tag{display:inline-flex;gap:8px;align-items:center;background:#0f1526;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:600}
+    .headline{font-size:44px;line-height:1.1;margin:16px 0 12px;font-weight:800;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:16px;line-height:1.6}
+    .hero .actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+    .card{background:linear-gradient(180deg,#12182a,#0f1424);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+
+    /* Sections */
+    section{padding:56px 0;border-top:1px solid var(--line)}
+    section h2{font-size:26px;margin:0 0 16px;font-weight:800}
+    section p.lead{color:var(--muted);margin:0 0 18px}
+
+    /* Skills */
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:#0f1526;color:var(--text);font-weight:600}
+
+    /* Grid */
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+
+    /* Timeline */
+    .timeline{position:relative}
+    .timeline::before{content:"";position:absolute;left:16px;top:6px;bottom:6px;width:2px;background:var(--line)}
+    .t-item{position:relative;padding-left:48px}
+    .t-bullet{position:absolute;left:8px;top:10px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 4px #0f1526}
+    .t-title{margin:0;font-size:18px;font-weight:700}
+    .t-meta{margin:6px 0 0;color:var(--muted)}
+
+    /* Project cards */
+    .project{display:flex;flex-direction:column;gap:12px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px}
+    .badge{background:#0f1526;border:1px solid var(--line);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:600;font-size:13px}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .form{display:grid;gap:12px}
+    .input{background:#0f1526;border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:12px}
+    textarea.input{min-height:120px}
+    .note{color:var(--muted);font-size:14px}
+
+    /* Footer */
+    footer{padding:24px 0;border-top:1px solid var(--line);color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-inner{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .headline{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Veena Rajoju</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="cta">
+        <a class="btn" href="#projects">View Work</a>
+        <a class="btn btn--primary" href="assets/Veena_Rajoju_Resume.pdf" download>Download CV</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Intro">
+      <div class="container hero-inner">
+        <div>
+          <span class="tag">B.Tech (CSE–Data Science) @ GCET • JNTUH</span>
+          <h2 class="headline">Hi, I'm <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Veena</span> — I build clean, reliable software.</h2>
+          <p class="sub">3rd-year Computer Science – Data Science student with hands-on experience in Core Java, C, Python and web technologies (HTML, CSS). Passionate about building practical solutions and learning modern engineering practices.</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="#contact">Hire Me</a>
+            <a class="btn" href="#projects">See Projects</a>
+          </div>
+        </div>
+        <div class="card">
+          <p class="lead"><strong>Quick facts</strong></p>
+          <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.8">
+            <li>Location: Hyderabad, India</li>
+            <li>Currently: B.Tech (CSE-DS), 3rd year</li>
+            <li>CGPA: 8.5</li>
+            <li>Languages: English, Telugu, Hindi</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container grid cols-2">
+        <div class="card">
+          <h2>About Me</h2>
+          <p class="lead">To be associated with a progressive organization where I can apply my knowledge and skills, continue to learn, and contribute to meaningful growth.</p>
+          <p>I enjoy writing clean, readable code and collaborating on projects that make everyday tasks simpler—like my recent "Car Solution" web app that organizes service bookings and records.</p>
+          <div class="actions" style="margin-top:8px">
+            <a class="btn" href="mailto:22r11a67b8@gcet.edu.in">Email Me</a>
+            <a class="btn" href="tel:+919392058074">Call</a>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Highlights</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Strong foundation in Core Java, C, Python</li>
+            <li>Comfortable with HTML, CSS and basic JDBC + MySQL</li>
+            <li>Experience using VS Code and Eclipse IDE</li>
+            <li>Windows development environment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <h2>Technical Skills</h2>
+        <p class="lead">Core programming, web fundamentals, tools, and databases.</p>
+        <div class="skills">
+          <span class="chip">Core Java</span>
+          <span class="chip">C</span>
+          <span class="chip">Python</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JDBC</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">VS Code</span>
+          <span class="chip">Eclipse</span>
+          <span class="chip">Windows</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="t-item card">
+            <div class="t-bullet" aria-hidden="true"></div>
+            <h3 class="t-title">B.Tech – CSE (Data Science)</h3>
+            <p class="t-meta">Geethanjali College of Engineering and Technology (GCET) • JNTUH • <strong>3rd year, pursuing</strong> • <strong>CGPA: 8.5</strong></p>
+          </div>
+          <div class="t-item card">
+            <div class="t-bullet" aria-hidden="true"></div>
+            <h3 class="t-title">Intermediate</h3>
+            <p class="t-meta">Narayana Junior College • Board of Intermediate • <strong>2022</strong> • <strong>97%</strong></p>
+          </div>
+          <div class="t-item card">
+            <div class="t-bullet" aria-hidden="true"></div>
+            <h3 class="t-title">S.S.C</h3>
+            <p class="t-meta">Indo Brilliant High School • Board of Secondary Education • <strong>2020</strong> • <strong>10.0 GPA</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="grid cols-2">
+          <article class="card project">
+            <div>
+              <h3 style="margin:.2rem 0">Car Solution Website</h3>
+              <p class="lead">A web application for managing car service bookings and maintaining service records for users and workshops.</p>
+            </div>
+            <div class="badges">
+              <span class="badge">Java</span>
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JDBC</span>
+              <span class="badge">MySQL</span>
+            </div>
+            <ul style="margin:0;padding-left:18px;color:var(--muted);line-height:1.8">
+              <li>User registration and login</li>
+              <li>Book, update, and track service appointments</li>
+              <li>Store and retrieve service history</li>
+            </ul>
+            <div class="actions">
+              <a class="btn" href="#" aria-disabled="true" onclick="alert('Demo link placeholder. Replace with your live site or GitHub URL!')">Live Demo</a>
+              <a class="btn" href="#" aria-disabled="true" onclick="alert('Repo link placeholder. Replace with your GitHub repository URL!')">Source Code</a>
+            </div>
+          </article>
+          
+          <!-- Add future projects here as additional <article> blocks -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container grid cols-2">
+        <div class="card">
+          <h2>Contact</h2>
+          <p class="lead">I'm open to internships and project collaborations. The fastest way to reach me is by email.</p>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Email: <a href="mailto:22r11a67b8@gcet.edu.in">22r11a67b8@gcet.edu.in</a></li>
+            <li>Phone: <a href="tel:+919392058074">+91 93920 58074</a></li>
+            <li>Location: Hyderabad, India</li>
+          </ul>
+          <p class="note">Tip: Add your LinkedIn and GitHub links here once they're ready.</p>
+        </div>
+        <form class="card form" action="mailto:22r11a67b8@gcet.edu.in" method="post" enctype="text/plain">
+          <label>
+            <span>Name</span>
+            <input class="input" type="text" name="name" placeholder="Your name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input class="input" type="email" name="email" placeholder="you@example.com" required>
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea class="input" name="message" placeholder="How can I help?" required></textarea>
+          </label>
+          <button class="btn btn--primary" type="submit">Send Message</button>
+          <small class="note">This form opens your email app to send the message. For a real backend, connect Formspree or a server endpoint.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Veena Rajoju. Made with ♥ in Hyderabad.
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          const el = document.querySelector(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
